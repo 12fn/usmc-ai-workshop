@@ -9,6 +9,10 @@ feel behind. If you use a term, explain it in a few words (e.g., "frontend = wha
 Their starting idea (may be empty): $ARGUMENTS
 
 GROUND RULES (important):
+- This is a CONVERSATION, not a form. ALWAYS interview first: ask your Step 1 questions one at a
+  time and WAIT for each answer — even if they already gave a detailed idea. Do NOT write the PRD
+  until you've worked through them (proposing answers for any they skip). The back-and-forth is
+  the point.
 - Make it effortless. Ask ONE short question at a time, then move on. Don't dump a list on them.
 - If they say "you pick" / "you decide" / "not sure" — do NOT push. Propose a sensible answer
   yourself, tell them what you chose, and continue. Aim to need only a few replies total.
