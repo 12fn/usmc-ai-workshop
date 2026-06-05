@@ -29,6 +29,11 @@ Make a folder for your work, open a terminal in it, and run `opencode`. Then typ
 The agent sets up your editor, wires in the workshop AI key, installs everything, and starts the
 chatbot. **When it asks for the workshop Claude API key, paste the one from the slide.**
 
+At the end it opens the **VSCodium** editor and asks you to **run `opencode` in VSCodium's
+built-in terminal** (Terminal → New Terminal, or Ctrl+`). Do that — now you're working in a real
+editor where you can **watch files change as they're edited**, and opencode is running on the
+powerful **Claude** model. Work inside VSCodium from here on.
+
 (Already have the repo open? Just run `opencode` inside it and say: *follow instructions.md*.)
 
 ### 3. Use the chatbot

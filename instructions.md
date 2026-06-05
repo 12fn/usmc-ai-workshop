@@ -23,11 +23,18 @@ Never echo it back and never write it into any tracked file.
 Copy `.env.example` to `.env` and replace BOTH `sk-ant-REPLACE_ME` placeholders with the
 pasted key. Leave `OPENAI_BASE_URL` and `OPENAI_MODEL` as-is.
 
-## 5. Switch opencode off the free model onto Claude
-This repo ships `opencode.json`, which selects a Claude model using the key from `.env`. opencode
-loads that key only when it starts, so tell the user EXACTLY this:
-**"Press Ctrl+C to exit opencode, then run `opencode` again in this folder — you'll be on Claude."**
-(Alternatively, inside opencode they can press the leader key then `m` to open the model picker.)
+## 5. Move into the IDE and switch onto Claude (two birds, one move)
+Combine the model switch with opening the IDE so the user can WATCH files change as they work.
+This repo ships `opencode.json`, which selects a Claude model using the key from `.env`; opencode
+loads that key only when it starts. Tell the user EXACTLY this:
+
+> **1.** Press **Ctrl+C** to exit opencode here.
+> **2.** In **VSCodium**, open a terminal: **View → Terminal** (or **Ctrl+`**).
+> **3.** Run **`opencode`** in that terminal.
+
+That single move (a) reopens opencode **on Claude** (it reads the key from `.env` at startup) and
+(b) runs it **inside VSCodium**, so every file opencode creates or edits shows up live in the
+file explorer on the left. From here on, work inside VSCodium.
 
 ## 6. Install the chatbot and run it
 - `python3 -m venv venv`
