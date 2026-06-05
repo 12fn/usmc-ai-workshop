@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MEU Logistics Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div id="app">
+    <header>MEU Logistics Assistant</header>
+    <div id="log"></div>
+    <form id="f">
+      <input id="m" placeholder="Ask about MEU logistics…" autocomplete="off" autofocus>
+      <button>Send</button>
+    </form>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
