@@ -12,7 +12,7 @@ client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY", ""),
     base_url=os.environ.get("OPENAI_BASE_URL", "https://api.anthropic.com/v1"),
 )
-MODEL = os.environ.get("OPENAI_MODEL", "claude-haiku-4-5-20251001")
+MODEL = os.environ.get("OPENAI_MODEL", "claude-opus-4-8")
 
 # ── The use case: your data goes into the system prompt ───────────────────────
 # ↓↓↓ TECHNICAL: change this file (and this prompt) to build your own use case ↓↓↓
