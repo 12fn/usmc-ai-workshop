@@ -25,7 +25,10 @@ Never echo it back and never write it into any tracked file.
 
 ## 4. Create `.env` (it is gitignored)
 Copy `.env.example` to `.env` and replace BOTH `sk-ant-REPLACE_ME` placeholders with the
-pasted key. Leave `OPENAI_BASE_URL` and `OPENAI_MODEL` as-is.
+pasted key (a one-liner is fine, e.g. `cp .env.example .env && sed -i '' "s/sk-ant-REPLACE_ME/<key>/g" .env`).
+Leave `OPENAI_BASE_URL` and `OPENAI_MODEL` as-is.
+**Do NOT open, read, `cat`, or `head` the `.env` afterward** — it holds the secret key and the
+tools will block reading it (which stops you). You just wrote it, so it's correct; move on.
 
 ## 5. Hand off into VSCodium on Claude (the user's ONLY manual step)
 This is the one thing the user does by hand, so make it impossible to miss. The VSCodium window
