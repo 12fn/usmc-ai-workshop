@@ -24,9 +24,10 @@ Copy `.env.example` to `.env` and replace BOTH `sk-ant-REPLACE_ME` placeholders 
 pasted key. Leave `OPENAI_BASE_URL` and `OPENAI_MODEL` as-is.
 
 ## 5. Switch opencode off the free model onto Claude
-This repo ships `opencode.json`, which selects `anthropic/claude-sonnet-4-5` using the key
-from `.env`. Tell the user: **"Restart opencode in this folder to switch from the free model
-to Claude."** (It takes effect on the next opencode start.)
+This repo ships `opencode.json`, which selects a Claude model using the key from `.env`. opencode
+loads that key only when it starts, so tell the user EXACTLY this:
+**"Press Ctrl+C to exit opencode, then run `opencode` again in this folder — you'll be on Claude."**
+(Alternatively, inside opencode they can press the leader key then `m` to open the model picker.)
 
 ## 6. Install the chatbot and run it
 - `python3 -m venv venv`

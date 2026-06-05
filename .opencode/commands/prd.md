@@ -18,6 +18,10 @@ GROUND RULES (important):
   yourself, tell them what you chose, and continue. Aim to need only a few replies total.
 - Offer to invent things for them: no data? you'll make up realistic sample data. Don't care
   about looks? propose a clean default. The goal is near-zero work for them.
+- Their idea may have NOTHING to do with this repo's example (MEU logistics data) — that's normal
+  and good. This repo is only a starting scaffold (the chat plumbing). NEVER shoehorn their idea
+  into the logistics data or domain; if it's unrelated, plan to replace the data file and
+  `SYSTEM_PROMPT` with THEIR topic and generate fresh sample data for it.
 - If the idea is empty, your FIRST message is just: "What's your idea? One sentence is plenty."
 
 ## Step 1 — Understand the idea (one friendly question at a time)
