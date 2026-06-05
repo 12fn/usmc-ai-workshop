@@ -40,4 +40,6 @@ to Claude."** (It takes effect on the next opencode start.)
   refresh the page.
 - **Technical:** open `app.py` — change `SYSTEM_PROMPT`, swap `meu_logistics_data.csv`, or
   change `OPENAI_MODEL` in `.env` to build your own use case on the OpenAI-format scaffold.
+- **Build your own idea:** type `/prd` in opencode — it interviews you, writes a plan into
+  `prds/`, and then builds it with you, step by step.
 - **Operator reminder:** cap the workshop key's spend limit and revoke it after the session.
