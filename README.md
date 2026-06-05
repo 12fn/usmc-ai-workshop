@@ -24,10 +24,10 @@ opencode comes with free models built in, so it works right away.
 ### 2. Let the agent set everything up
 Make a folder for your work, open a terminal in it, and run `opencode`. Then type this one line:
 
-> Clone https://github.com/12fn/usmc-ai-workshop and follow instructions.md
+> Clone https://github.com/12fn/usmc-ai-workshop into this folder and follow its instructions.md
 
-The agent sets up your editor, wires in the workshop AI key, installs everything, and starts the
-chatbot. **When it asks for the workshop Claude API key, paste the one from the slide.**
+The agent installs the **VSCodium** editor, wires in the workshop AI key, installs everything, and
+starts the chatbot. **When it asks for the workshop Claude API key, paste the one from the slide.**
 
 At the end it opens the **VSCodium** editor and asks you to **run `opencode` in VSCodium's
 built-in terminal** (Terminal → New Terminal, or Ctrl+`). Do that — now you're working in a real
@@ -37,7 +37,8 @@ powerful **Claude** model. Work inside VSCodium from here on.
 (Already have the repo open? Just run `opencode` inside it and say: *follow instructions.md*.)
 
 ### 3. Use the chatbot
-It opens at **http://127.0.0.1:7860**. Ask it questions about the MEU logistics data.
+It's running at **http://127.0.0.1:7860** — open that in your browser and ask it questions about
+the MEU logistics data.
 
 ### 4. Make it yours — two easy paths
 - **Change how it looks (no coding):** open `static/style.css`, change the colors in the
