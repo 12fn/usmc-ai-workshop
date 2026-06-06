@@ -26,8 +26,8 @@ Make a folder for your work, open a terminal in it, and run `opencode`. Then typ
 
 > Clone https://github.com/12fn/usmc-ai-workshop into this folder and follow its instructions.md
 
-The agent installs the **VSCodium** editor, wires in the workshop AI key, installs everything, and
-starts the chatbot. **When it asks for the workshop Claude API key, paste the one from the slide.**
+The agent installs the **VSCodium** editor, unlocks the workshop AI key (already sealed in the
+repo — nothing for you to type), installs everything, and starts the chatbot.
 
 At the end it opens the **VSCodium** editor and asks you to **run `opencode` in VSCodium's
 built-in terminal** (Terminal → New Terminal, or Ctrl+`). Do that — now you're working in a real
@@ -58,6 +58,31 @@ It asks you a few simple questions, writes a clear plan (a PRD) into the `prds/`
 builds it for you step by step — starting from this chatbot's scaffolding.
 
 ## A note on the key
-The workshop AI key is shared — don't post it anywhere and don't commit it. The `.env` file
-where it lives is already set to stay private (gitignored). After the workshop, the key is
-switched off.
+The workshop AI key is shared and short-lived. You don't type it or see it — it's sealed
+(encrypted) in the repo and the agent unlocks it for you. After the workshop it's switched off.
+
+---
+
+## For the operator (running the workshop)
+The attendee flow above needs zero key-typing because the key is **sealed in the repo**, not
+pasted. Here's how to set that up and keep it safe:
+
+1. **Make a dedicated, capped key.** Create a fresh Anthropic API key just for this session with a
+   hard spend limit. (Don't reuse a long-lived key.)
+2. **Seal it into the repo** (the raw key is never committed — only an encrypted blob, which
+   GitHub secret-scanning ignores, so it won't be auto-revoked):
+   ```
+   pip install cryptography
+   python3 scripts/seal_key.py "<workshop-password>"   # paste the sk-ant-... key at the prompt
+   git add workshop-key.enc && git commit -m "seal workshop key" && git push
+   ```
+3. **Put the same `<workshop-password>` into `instructions.md` Step 4** (replace
+   `WORKSHOP_PASSWORD_HERE`). The password being public is fine — its only protection job is to
+   keep the key out of automated secret-scanners; the real safety is operational (next line).
+4. **During the session:** watch the key's usage in the Anthropic console; the spend cap is your
+   backstop.
+5. **Right after the session:** **revoke the key.** That instantly makes `workshop-key.enc` inert,
+   regardless of who has the repo. Re-seal a new key next time.
+
+The unlock writes the key into `.env` (the chatbot, via python-dotenv) and into opencode's own
+credential store `~/.local/share/opencode/auth.json` (opencode does NOT read `.env`).

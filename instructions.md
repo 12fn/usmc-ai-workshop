@@ -19,21 +19,32 @@ and works exactly like VS Code.)
 Confirm the VSCodium window is now open on this project. If install is blocked on a locked-down
 machine, say so and continue — the chatbot still runs from the terminal.
 
-## 3. Get the workshop Claude key
-Ask the user: **"Paste your workshop Claude API key (from the slide):"** Capture it.
-Never echo it back and never write it into any tracked file.
-
-## 4. Create `.env` (it is gitignored)
-Copy `.env.example` to `.env` and replace BOTH `sk-ant-REPLACE_ME` placeholders with the pasted
-key (a one-liner is fine, e.g. `cp .env.example .env && sed -i '' "s/sk-ant-REPLACE_ME/<key>/g" .env`).
-Leave `OPENAI_BASE_URL` and `OPENAI_MODEL` as-is.
-**Do NOT open, read, `cat`, or `head` the `.env` afterward** — it holds the secret key and the
-tools will block reading it (which stops you). You just wrote it, so it's correct; move on.
-
-## 5. Install the chatbot and start it (in the BACKGROUND — do not block)
+## 3. Install the project dependencies
+Create the virtual environment and install everything (this also installs the tool used to unlock
+the workshop key in Step 4):
 - `python3 -m venv venv`
 - macOS/Linux: `source venv/bin/activate` — Windows: `venv\Scripts\activate`
 - `pip install -r requirements.txt`
+
+## 4. Unlock the workshop AI key (nothing to type — it's sealed in this repo)
+The workshop Claude key is sealed in `workshop-key.enc` (encrypted — safe to be public). Unlock it
+with the workshop password; this provisions the key into BOTH places that need it, automatically:
+the chatbot's `.env` AND opencode's own credential store (so opencode comes up on Claude).
+
+```
+python scripts/unlock_key.py "WORKSHOP_PASSWORD_HERE"
+```
+
+> **Operator:** replace `WORKSHOP_PASSWORD_HERE` with the same password you used in
+> `scripts/seal_key.py`. It is fine for this to be public — the key is rate-limited and monitored
+> during the session and rotated immediately afterward.
+
+The script writes the key only into `.env` (gitignored) and `~/.local/share/opencode/auth.json`.
+**Do NOT `cat`/open `.env` or the auth file** — they hold the secret; you just wrote them, so move
+on. If unlock fails, report the error verbatim and stop (do NOT ask the user to paste a key).
+
+## 5. Start the chatbot (in the BACKGROUND — do not block)
+With the venv still active:
 - Start it in the background so it keeps running and does NOT block you:
   - macOS/Linux: `nohup python app.py > /tmp/chatbot.log 2>&1 &`
   - Windows: `start "" python app.py`
@@ -46,7 +57,6 @@ tools will block reading it (which stops you). You just wrote it, so it's correc
 - **Change what it does:** edit `SYSTEM_PROMPT` or swap `meu_logistics_data.csv` in `app.py`.
 - **Build your own idea:** type `/prd` in opencode — it interviews you, writes a plan into
   `prds/`, then builds it with you, step by step.
-- **Operator reminder:** cap the workshop key's spend limit and revoke it after the session.
 
 ## 7. FINAL STEP — hand off into VSCodium on Claude (ALWAYS end here)
 This is the user's ONE manual step, and it's how they move onto the powerful Claude model. ALWAYS
@@ -62,6 +72,8 @@ finish your run by printing EXACTLY this, as the very last thing you say:
 > You're now in the editor (you'll see files change on the left) and on Claude. Ask it for
 > anything — or type **`/prd`** to turn an idea into a working app.
 
-Why this works: relaunching opencode in this folder loads the Claude key from `.env` at startup
-(you — the current free-model session — cannot switch your own model live), and running it inside
+Why this works: Step 4 wrote the Claude key into opencode's own credential store
+(`~/.local/share/opencode/auth.json`), so launching opencode in this folder comes up on Claude
+with no key to enter — opencode does NOT read `.env`, which is why the key goes into its
+credential store (for opencode) and into `.env` separately (for the chatbot). Running it inside
 VSCodium lets the user watch every file it edits.

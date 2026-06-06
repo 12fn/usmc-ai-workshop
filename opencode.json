@@ -1,9 +1,4 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "anthropic/claude-opus-4-8",
-  "provider": {
-    "anthropic": {
-      "options": { "apiKey": "{env:ANTHROPIC_API_KEY}" }
-    }
-  }
+  "model": "anthropic/claude-opus-4-8"
 }
