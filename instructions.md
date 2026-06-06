@@ -26,22 +26,23 @@ the workshop key in Step 4):
 - macOS/Linux: `source venv/bin/activate` — Windows: `venv\Scripts\activate`
 - `pip install -r requirements.txt`
 
-## 4. Unlock the workshop AI key (nothing to type — it's sealed in this repo)
-The workshop Claude key is sealed in `workshop-key.enc` (encrypted — safe to be public). Unlock it
-with the workshop password; this provisions the key into BOTH places that need it, automatically:
-the chatbot's `.env` AND opencode's own credential store (so opencode comes up on Claude).
+## 4. Unlock the workshop AI key (use the password the user gave you)
+The workshop Claude key is sealed in `workshop-key.enc` (encrypted — safe to be public). The user
+gave you the **workshop password** in their request (e.g. *"…and the password is MCworkshop"*).
+Unlock the key with THAT password — this provisions it into BOTH places automatically: the
+chatbot's `.env` AND opencode's own credential store (so opencode comes up on Claude).
 
 ```
-python scripts/unlock_key.py "WORKSHOP_PASSWORD_HERE"
+python scripts/unlock_key.py "<the workshop password the user gave you>"
 ```
 
-> **Operator:** replace `WORKSHOP_PASSWORD_HERE` with the same password you used in
-> `scripts/seal_key.py`. It is fine for this to be public — the key is rate-limited and monitored
-> during the session and rotated immediately afterward.
+If the user did NOT include a password, ask them once: **"What's the workshop password?"** — then
+run the command. Do not invent one.
 
 The script writes the key only into `.env` (gitignored) and `~/.local/share/opencode/auth.json`.
 **Do NOT `cat`/open `.env` or the auth file** — they hold the secret; you just wrote them, so move
-on. If unlock fails, report the error verbatim and stop (do NOT ask the user to paste a key).
+on. If unlock fails with a wrong-password error, ask the user to confirm the password and retry;
+never ask them to paste an API key.
 
 ## 5. Start the chatbot (in the BACKGROUND — do not block)
 With the venv still active:

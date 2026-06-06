@@ -22,12 +22,13 @@ the heavy lifting.
 opencode comes with free models built in, so it works right away.
 
 ### 2. Let the agent set everything up
-Make a folder for your work, open a terminal in it, and run `opencode`. Then type this one line:
+Make a folder for your work, open a terminal in it, and run `opencode`. Then type this one line
+(use the **workshop password from the slide** in place of `MCworkshop`):
 
-> Clone https://github.com/12fn/usmc-ai-workshop into this folder and follow its instructions.md
+> Clone https://github.com/12fn/usmc-ai-workshop into this folder, follow its instructions.md — and the password is MCworkshop
 
-The agent installs the **VSCodium** editor, unlocks the workshop AI key (already sealed in the
-repo — nothing for you to type), installs everything, and starts the chatbot.
+The agent installs the **VSCodium** editor, unlocks the workshop AI key (sealed in the repo — you
+just hand it the password, no long key to type), installs everything, and starts the chatbot.
 
 At the end it opens the **VSCodium** editor and asks you to **run `opencode` in VSCodium's
 built-in terminal** (Terminal → New Terminal, or Ctrl+`). Do that — now you're working in a real
@@ -76,13 +77,14 @@ pasted. Here's how to set that up and keep it safe:
    python3 scripts/seal_key.py "<workshop-password>"   # paste the sk-ant-... key at the prompt
    git add workshop-key.enc && git commit -m "seal workshop key" && git push
    ```
-3. **Put the same `<workshop-password>` into `instructions.md` Step 4** (replace
-   `WORKSHOP_PASSWORD_HERE`). The password being public is fine — its only protection job is to
-   keep the key out of automated secret-scanners; the real safety is operational (next line).
+3. **Hand attendees the password at the start** — put `<workshop-password>` on a slide / say it
+   aloud. They include it in their first prompt to opencode (*"…and the password is MCworkshop"*),
+   and the recipe uses it to unlock. **Do NOT commit the password to the repo** — keeping it out
+   of the public repo is what makes the seal actually protect the key.
 4. **During the session:** watch the key's usage in the Anthropic console; the spend cap is your
    backstop.
 5. **Right after the session:** **revoke the key.** That instantly makes `workshop-key.enc` inert,
-   regardless of who has the repo. Re-seal a new key next time.
+   regardless of who has the repo. Re-seal a new key (and pick a new password) next time.
 
 The unlock writes the key into `.env` (the chatbot, via python-dotenv) and into opencode's own
 credential store `~/.local/share/opencode/auth.json` (opencode does NOT read `.env`).
